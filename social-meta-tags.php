@@ -80,11 +80,10 @@ class SocialMetaTagsPlugin extends Plugin
                 if (!empty($this->grav['page']->value('media.image'))) {
                     $images = $this->grav['page']->media()->images();
                     $image  = array_shift($images);
-                    $uri    = new \Grav\Common\uri;
 
                     $meta['twitter:image']['name']     = 'twitter:image';
                     $meta['twitter:image']['property'] = 'twitter:image';
-                    $meta['twitter:image']['content']  = $uri->base() . $image->url();;
+                    $meta['twitter:image']['content']  = $this->grav['uri']->base() . $image->url();;
                 }
             }
 
@@ -129,11 +128,10 @@ class SocialMetaTagsPlugin extends Plugin
             if (!empty($this->grav['page']->value('media.image'))) {
                 $images = $this->grav['page']->media()->images();
                 $image  = array_shift($images);
-                $uri    = new \Grav\Common\uri;
 
                 $meta['og:image']['name']      = 'og:image';
                 $meta['og:image']['property']  = 'og:image';
-                $meta['og:image']['content']   = $uri->base() . $image->url();
+                $meta['og:image']['content']   = $this->grav['uri']->base() . $image->url();
             }
 
             $meta['fb:app_id']['name']         = 'fb:app_id';
