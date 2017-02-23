@@ -10,7 +10,7 @@ Add all Meta Tags that need Facebook Open Graph, and Twitter Cards.
 # Features
 
 * [Open Graph](http://ogp.me/) support.
-* [Twitter Cards](https://dev.twitter.com/cards/overview) support. You cant select between Summary and Large cards.
+* [Twitter Cards](https://dev.twitter.com/cards/overview) support. You can select between Summary and Large cards.
 * [AboutMe plugin](https://github.com/Birssan/grav-plugin-about-me) integration.
 
 
