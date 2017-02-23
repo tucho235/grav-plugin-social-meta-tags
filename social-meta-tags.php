@@ -59,18 +59,21 @@ class SocialMetaTagsPlugin extends Plugin
         if($this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.twitter.enabled')) {
 
             if (!isset($meta['twitter:card'])) {
-                $meta['twitter:card']['name']    = 'twitter:card';
-                $meta['twitter:card']['content'] = $this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.twitter.type');
+                $meta['twitter:card']['name']      = 'twitter:card';
+                $meta['twitter:card']['property']  = 'twitter:card';
+                $meta['twitter:card']['content']   = $this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.twitter.type');
             }
 
             if (!isset($meta['twitter:title'])) {
-                $meta['twitter:title']['name']    = 'twitter:title';
-                $meta['twitter:title']['content'] = $this->grav['page']->title();
+                $meta['twitter:title']['name']     = 'twitter:title';
+                $meta['twitter:title']['property'] = 'twitter:title';
+                $meta['twitter:title']['content']  = $this->grav['page']->title();
             }
 
             if (!isset($meta['twitter:description'])) {
-                $meta['twitter:description']['name']    = 'twitter:description';
-                $meta['twitter:description']['content'] = substr($this->grav['page']->value('content'), 0, 140);
+                $meta['twitter:description']['name']     = 'twitter:description';
+                $meta['twitter:description']['property'] = 'twitter:description';
+                $meta['twitter:description']['content']  = substr($this->grav['page']->value('content'), 0, 140);
             }
 
             if (!isset($meta['twitter:image'])) {
@@ -79,8 +82,9 @@ class SocialMetaTagsPlugin extends Plugin
                     $image  = array_shift($images);
                     $uri    = new \Grav\Common\uri;
 
-                    $meta['twitter:image']['name']    = 'twitter:image';
-                    $meta['twitter:image']['content'] = $uri->base() . $image->url();;
+                    $meta['twitter:image']['name']     = 'twitter:image';
+                    $meta['twitter:image']['property'] = 'twitter:image';
+                    $meta['twitter:image']['content']  = $uri->base() . $image->url();;
                 }
             }
 
@@ -89,8 +93,9 @@ class SocialMetaTagsPlugin extends Plugin
                     and $this->grav['config']->get('plugins.aboutme.social_pages.pages.twitter.url')
                 ) {
                     $user = preg_replace('((http|https)://twitter.com/)', '@', $this->grav['config']->get('plugins.aboutme.social_pages.pages.twitter.url'));
-                    $meta['twitter:site']['name']    = 'twitter:site';
-                    $meta['twitter:site']['content'] = $user;
+                    $meta['twitter:site']['name']     = 'twitter:site';
+                    $meta['twitter:site']['property'] = 'twitter:site';
+                    $meta['twitter:site']['content']  = $user;
                 }
             }
         }
@@ -101,31 +106,38 @@ class SocialMetaTagsPlugin extends Plugin
 
         if($this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.facebook.enabled')){
 
-            $meta['og:sitename']['name']       = 'og:sitename';
-            $meta['og:sitename']['content']    = $this->grav['page']->value('name');
+            $meta['og:sitename']['name']        = 'og:sitename';
+            $meta['og:sitename']['property']    = 'og:sitename';
+            $meta['og:sitename']['content']     = $this->grav['page']->value('name');
 
-            $meta['og:title']['name']          = 'og:title';
-            $meta['og:title']['content']       = $this->grav['page']->title();
+            $meta['og:title']['name']           = 'og:title';
+            $meta['og:title']['property']       = 'og:title';
+            $meta['og:title']['content']        = $this->grav['page']->title();
 
-            $meta['og:description']['name']    = 'og:description';
-            $meta['og:description']['content'] = substr($this->grav['page']->value('content'),0,140);
+            $meta['og:description']['name']     = 'og:description';
+            $meta['og:description']['property'] = 'og:description';
+            $meta['og:description']['content']  = substr($this->grav['page']->value('content'),0,140);
 
-            $meta['og:type']['name']           = 'og:type';
-            $meta['og:type']['content']        = 'article';
+            $meta['og:type']['name']            = 'og:type';
+            $meta['og:type']['property']        = 'og:type';
+            $meta['og:type']['content']         = 'article';
 
-            $meta['og:url']['name']            = 'og:url';
-            $meta['og:url']['content']         = $this->grav['uri']->url(true);
+            $meta['og:url']['name']             = 'og:url';
+            $meta['og:url']['property']         = 'og:url';
+            $meta['og:url']['content']          = $this->grav['uri']->url(true);
 
             if (!empty($this->grav['page']->value('media.image'))) {
                 $images = $this->grav['page']->media()->images();
                 $image  = array_shift($images);
                 $uri    = new \Grav\Common\uri;
 
-                $meta['og:image']['name']          = 'og:image';
-                $meta['og:image']['content']       = $uri->base() . $image->url();
+                $meta['og:image']['name']      = 'og:image';
+                $meta['og:image']['property']  = 'og:image';
+                $meta['og:image']['content']   = $uri->base() . $image->url();
             }
 
             $meta['fb:app_id']['name']         = 'fb:app_id';
+            $meta['fb:app_id']['property']     = 'fb:app_id';
             $meta['fb:app_id']['content']      = $this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.facebook.appid');
 
         }
