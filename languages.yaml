@@ -55,3 +55,32 @@ es:
         HELP: 'Comparte en Facebook'
         APPID: 'App ID'
         APPID_HELP: 'El ID de la aplicación que obtiene de la página de desarrolladores de Facebook (https://developers.facebook.com/apps).'
+
+# French
+fr:
+  PLUGINS:
+    SOCIAL_META_TAGS:
+      PLUGIN_NAME: 'Social Meta Tags'
+      PLUGIN_STATUS: 'Statut du plugin'
+      PLUGIN_ACTIVE: 'Actif'
+      PLUGIN_INACTIVE: 'Inactif'
+      PLUGIN_ACTIVE_HELP: 'Cette option permet d’activer ou non le plugin sur une base par page.'
+      YES: 'Oui'
+      NO: 'Non'
+      
+      TWITTER:
+        NAME: 'Cartes Twitter'
+        ENABLED: 'Cartes Twitter activées'
+        HELP: 'Partager avec les cartes Twitter'
+        TYPE: 'Type de carte'
+        TYPE_HELP: 'Carte de résumé avec grande image ou résumé court'
+        TYPE_CARDS:
+          LARGE: 'Carte de résumé avec grande image'
+          SUMMARY: 'Carte de résumé'
+
+      FACEBOOK:
+        NAME: 'Facebook Open Graph'
+        ENABLED: 'Facebook Open Graph activé'
+        HELP: 'Partager sur Facebook'
+        APPID: 'ID d’application'
+        APPID_HELP: 'L’ID d’application pour se connecter à la page Développeurs Facebook (https://developers.facebook.com/apps).'
