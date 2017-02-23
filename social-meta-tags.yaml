@@ -1,0 +1,9 @@
+enabled: true
+social_pages:
+  pages:
+    twitter:
+      enabled: true
+      type: summary
+    facebook:
+      enabled: false
+      appid: '1234567890'

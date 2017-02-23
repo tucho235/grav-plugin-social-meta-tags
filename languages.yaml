@@ -1,0 +1,57 @@
+# English
+en:
+  PLUGINS:
+    SOCIAL_META_TAGS:
+      PLUGIN_NAME: 'Social Meta Tags'
+      PLUGIN_STATUS: 'Plugin status'
+      PLUGIN_ACTIVE: 'Active'
+      PLUGIN_INACTIVE: 'Inactive'
+      PLUGIN_ACTIVE_HELP: 'This option is used to (de-)activate this plugin on a per-page basis.'
+      YES: 'Yes'
+      NO: 'No'
+      
+      TWITTER:
+        NAME: 'Twitter Cards'
+        ENABLED: 'Twitter Cards active'
+        HELP: 'Share with Twitter Cards'
+        TYPE: 'Card Type'
+        TYPE_HELP: 'Summary Card with Large Image or Short Summary'
+        TYPE_CARDS:
+          LARGE: 'Summary Card with Large Image'
+          SUMMARY: 'Summary Card'
+
+      FACEBOOK:
+        NAME: 'Facebook Open Graph'
+        ENABLED: 'Facebook Open Graph active'
+        HELP: 'Share on Facebook'
+        APPID: 'App ID'
+        APPID_HELP: 'The App ID you get from the Facebook Developers page (https://developers.facebook.com/apps).'
+
+# Español
+es:
+  PLUGINS:
+    SOCIAL_META_TAGS:
+      PLUGIN_NAME: 'Social Meta Tags'
+      PLUGIN_STATUS: 'Plugin status'
+      PLUGIN_ACTIVE: 'Activo'
+      PLUGIN_INACTIVE: 'Inactivo'
+      PLUGIN_ACTIVE_HELP: 'Esta opción es usara para activar/desactivar el plugin'
+      YES: 'Si'
+      NO: 'No'
+
+      TWITTER:
+        NAME: 'Twitter Cards'
+        ENABLED: 'Twitter Cards activo'
+        HELP: 'Comparte en Twitter'
+        TYPE: 'Tipo de Twitter Card'
+        TYPE_HELP: 'Tarjetas de Resumen con o sin imagen grande'
+        TYPE_CARDS:
+          LARGE: 'Tarjetas de Resumen con imagen grande'
+          SUMMARY: 'Tarjetas de Resumen'
+
+      FACEBOOK:
+        NAME: 'Facebook Open Graph'
+        ENABLED: 'Facebook Open Graph activo'
+        HELP: 'Comparte en Facebook'
+        APPID: 'App ID'
+        APPID_HELP: 'El ID de la aplicación que obtiene de la página de desarrolladores de Facebook (https://developers.facebook.com/apps).'
