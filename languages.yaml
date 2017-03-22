@@ -84,3 +84,32 @@ fr:
         HELP: 'Partager sur Facebook'
         APPID: 'ID d’application'
         APPID_HELP: 'L’ID d’application pour se connecter à la page Développeurs Facebook (https://developers.facebook.com/apps).'
+
+# German
+de:
+  PLUGINS:
+    SOCIAL_META_TAGS:
+      PLUGIN_NAME: 'Social Meta Tags'
+      PLUGIN_STATUS: 'Plugin Status'
+      PLUGIN_ACTIVE: 'Aktiviert'
+      PLUGIN_INACTIVE: 'Deaktiviert'
+      PLUGIN_ACTIVE_HELP: 'Diese Option dient dem seitenbasierten Aktivieren/Deaktivieren des Plugins.'
+      YES: 'Ja'
+      NO: 'Nein'
+      
+      TWITTER:
+        NAME: 'Twitter Cards'
+        ENABLED: 'Twitter Cards aktiviert'
+        HELP: 'Teile mit Twitter Cards'
+        TYPE: 'Karten-Typ'
+        TYPE_HELP: 'Karte mit einer Zusammenfassung und großem Bild oder nur einer Zusammenfassung'
+        TYPE_CARDS:
+          LARGE: 'Karte mit einer Zusammenfassung und großem Bild'
+          SUMMARY: 'Karte mit einer Zusammenfassung'
+
+      FACEBOOK:
+        NAME: 'Facebook Open Graph'
+        ENABLED: 'Facebook Open Graph aktiviert'
+        HELP: 'Teile auf Facebook'
+        APPID: 'App ID'
+        APPID_HELP: 'Dies ist die ID-Nummer, die auf der Facebook Entwickler-Website erhältlich ist (https://developers.facebook.com/apps).'
