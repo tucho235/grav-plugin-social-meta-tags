@@ -67,13 +67,13 @@ class SocialMetaTagsPlugin extends Plugin
             if (!isset($meta['twitter:title'])) {
                 $meta['twitter:title']['name']     = 'twitter:title';
                 $meta['twitter:title']['property'] = 'twitter:title';
-                $meta['twitter:title']['content']  = $this->grav['page']->title();
+                $meta['twitter:title']['content']  = $this->sanitizeMarkdowns($this->grav['page']->title());
             }
 
             if (!isset($meta['twitter:description'])) {
                 $meta['twitter:description']['name']     = 'twitter:description';
                 $meta['twitter:description']['property'] = 'twitter:description';
-                $meta['twitter:description']['content']  = substr($this->grav['page']->value('content'), 0, 140);
+                $meta['twitter:description']['content']  = $this->sanitizeMarkdowns($this->grav['page']->value('content'));
             }
 
             if (!isset($meta['twitter:image'])) {
@@ -83,7 +83,7 @@ class SocialMetaTagsPlugin extends Plugin
 
                     $meta['twitter:image']['name']     = 'twitter:image';
                     $meta['twitter:image']['property'] = 'twitter:image';
-                    $meta['twitter:image']['content']  = $this->grav['uri']->base() . $image->url();;
+                    $meta['twitter:image']['content']  = $this->grav['uri']->base() . $image->url();
                 }
             }
 
@@ -111,11 +111,11 @@ class SocialMetaTagsPlugin extends Plugin
 
             $meta['og:title']['name']           = 'og:title';
             $meta['og:title']['property']       = 'og:title';
-            $meta['og:title']['content']        = $this->grav['page']->title();
+            $meta['og:title']['content']        = $this->sanitizeMarkdowns($this->grav['page']->title());
 
             $meta['og:description']['name']     = 'og:description';
             $meta['og:description']['property'] = 'og:description';
-            $meta['og:description']['content']  = substr($this->grav['page']->value('content'),0,140);
+            $meta['og:description']['content']  = $this->sanitizeMarkdowns($this->grav['page']->value('content'));
 
             $meta['og:type']['name']            = 'og:type';
             $meta['og:type']['property']        = 'og:type';
@@ -140,6 +140,35 @@ class SocialMetaTagsPlugin extends Plugin
 
         }
         return $meta;
+    }
+    
+    private function sanitizeMarkdowns($text){
+        $rules = array (
+            '/(#+)(.*)/'                             => '\2',  // headers
+            '/(&lt;|<)!--\n((.*|\n)*)\n--(&gt;|\>)/' => '',    // comments
+            '/(\*|-|_){3}/'                          => '',    // hr
+            '/!\[([^\[]+)\]\(([^\)]+)\)/'            => '',    // images
+            '/\[([^\[]+)\]\(([^\)]+)\)/'             => '\1',  // links
+            '/(\*\*|__)(.*?)\1/'                     => '\2',  // bold
+            '/(\*|_)(.*?)\1/'                        => '\2',  // emphasis
+            '/\~\~(.*?)\~\~/'                        => '\1',  // del
+            '/\:\"(.*?)\"\:/'                        => '\1',  // quote
+            '/```(.*)\n((.*|\n)+)\n```/'             => '\2',  // fence code
+            '/`(.*?)`/'                              => '\1',  // inline code
+            '/(\*|\+|-)(.*)/'                        => '\2',  // ul lists
+            '/\n[0-9]+\.(.*)/'                       => '\2',  // ol lists
+            '/(&gt;|\>)+(.*)/'                       => '\2',  // blockquotes
+        );
+
+        foreach ($rules as $regex => $replacement) {
+            if (is_callable ( $replacement)) {
+                $text = preg_replace_callback ($regex, $replacement, $text);
+            } else {
+                $text = preg_replace ($regex, $replacement, $text);
+            }
+        }
+
+        return substr(htmlspecialchars($text, ENT_QUOTES, 'UTF-8'),0,140);
     }
 
 }
