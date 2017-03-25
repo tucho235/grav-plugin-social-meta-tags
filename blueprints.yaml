@@ -1,8 +1,7 @@
 name: Social Meta Tags
-version: 0.1.0
+version: 0.1.1
 description: Facebook Open Graph and Twitter Cards Meta Tags
 icon: code
-testing: true
 author:
   name: Victor Rosset
   email: victorrosset@gmail.com
