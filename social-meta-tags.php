@@ -73,7 +73,7 @@ class SocialMetaTagsPlugin extends Plugin
             if (!isset($meta['twitter:description'])) {
                 $meta['twitter:description']['name']     = 'twitter:description';
                 $meta['twitter:description']['property'] = 'twitter:description';
-                $meta['twitter:description']['content']  = $this->sanitizeMarkdowns($this->grav['page']->value('content'));
+                $meta['twitter:description']['content']  = $this->sanitizeMarkdowns(strip_tags($this->grav['page']->summary()));
             }
 
             if (!isset($meta['twitter:image'])) {
@@ -88,14 +88,28 @@ class SocialMetaTagsPlugin extends Plugin
             }
 
             if (!isset($meta['twitter:site'])) {
-                if ($this->grav['config']->get('plugins.aboutme.social_pages.enabled')
-                    and $this->grav['config']->get('plugins.aboutme.social_pages.pages.twitter.url')
-                ) {
-                    $user = preg_replace('((http|https)://twitter.com/)', '@', $this->grav['config']->get('plugins.aboutme.social_pages.pages.twitter.url'));
-                    $meta['twitter:site']['name']     = 'twitter:site';
-                    $meta['twitter:site']['property'] = 'twitter:site';
-                    $meta['twitter:site']['content']  = $user;
+                //Use AboutMe plugin configuration
+                if ($this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.twitter.aboutme'))
+                {
+                    if ($this->grav['config']->get('plugins.aboutme.social_pages.enabled')
+                         and $this->grav['config']->get('plugins.aboutme.social_pages.pages.twitter.url'))
+                    {
+                        $user = preg_replace('((http|https)://twitter.com/)', '@', $this->grav['config']->get('plugins.aboutme.social_pages.pages.twitter.url'));
+                    }
+                    else
+                    {
+                        $user = "";
+                    }
                 }
+                //Use plugin self-configuration
+                else
+                {
+                    $user = "@".$this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.twitter.username');
+                }
+                //Update data
+                $meta['twitter:site']['name']     = 'twitter:site';
+                $meta['twitter:site']['property'] = 'twitter:site';
+                $meta['twitter:site']['content']  = $user;
             }
         }
         return $meta;
@@ -115,7 +129,7 @@ class SocialMetaTagsPlugin extends Plugin
 
             $meta['og:description']['name']     = 'og:description';
             $meta['og:description']['property'] = 'og:description';
-            $meta['og:description']['content']  = $this->sanitizeMarkdowns($this->grav['page']->value('content'));
+            $meta['og:description']['content']  = $this->sanitizeMarkdowns(strip_tags($this->grav['page']->summary()));
 
             $meta['og:type']['name']            = 'og:type';
             $meta['og:type']['property']        = 'og:type';
