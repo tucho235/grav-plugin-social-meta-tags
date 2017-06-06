@@ -4,6 +4,8 @@ social_pages:
     twitter:
       enabled: true
       type: summary
+      aboutme: false
+      username: ''
     facebook:
       enabled: false
       appid: '1234567890'

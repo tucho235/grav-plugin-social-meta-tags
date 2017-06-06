@@ -11,7 +11,7 @@ Add all Meta Tags that need Facebook Open Graph, and Twitter Cards.
 
 * [Open Graph](http://ogp.me/) support.
 * [Twitter Cards](https://dev.twitter.com/cards/overview) support. You can select between Summary and Large cards.
-* [AboutMe plugin](https://github.com/Birssan/grav-plugin-about-me) integration.
+* [AboutMe plugin](https://github.com/Birssan/grav-plugin-about-me) integration possibility.
 
 
 # Installation
@@ -33,7 +33,8 @@ Just enable plugin, no need edit any template. :)
 
 ## Associate Twitter account
 
-Social-Meta-Tags need [AboutMe plugin](https://github.com/Birssan/grav-plugin-about-me). To add/change the Twitter defined in `twitter:site`, edit your profile in the AboutMe plugin.
+Social-Meta-Tags can use [AboutMe plugin](https://github.com/Birssan/grav-plugin-about-me) min version 1.1.4. To add/change the Twitter defined in `twitter:site`, edit your profile in the AboutMe plugin.
+However, you have possibility to link `twitter:site` without using AboutMe plugin.
 
 ## Facebook App Id
 
