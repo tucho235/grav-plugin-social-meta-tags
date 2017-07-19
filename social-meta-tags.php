@@ -73,7 +73,7 @@ class SocialMetaTagsPlugin extends Plugin
             if (!isset($meta['twitter:description'])) {
                 $meta['twitter:description']['name']     = 'twitter:description';
                 $meta['twitter:description']['property'] = 'twitter:description';
-                $meta['twitter:description']['content']  = $this->sanitizeMarkdowns(strip_tags($this->grav['page']->summary()));
+                $meta['twitter:description']['content']  = $this->getPageDescription($this->grav['page']);
             }
 
             if (!isset($meta['twitter:image'])) {
@@ -129,7 +129,7 @@ class SocialMetaTagsPlugin extends Plugin
 
             $meta['og:description']['name']     = 'og:description';
             $meta['og:description']['property'] = 'og:description';
-            $meta['og:description']['content']  = $this->sanitizeMarkdowns(strip_tags($this->grav['page']->summary()));
+            $meta['og:description']['content']  =  $this->getPageDescription($this->grav['page']);
 
             $meta['og:type']['name']            = 'og:type';
             $meta['og:type']['property']        = 'og:type';
@@ -155,7 +155,35 @@ class SocialMetaTagsPlugin extends Plugin
         }
         return $meta;
     }
-    
+
+    /**
+     * Gets the description of a page
+     * @return string
+     */
+    private function getPageDescription($page) {
+      if(count($page->collection()->modular()) && $this->stringIsEmpty($this->sanitizeMarkdowns(strip_tags($page->summary())))) {
+        foreach($page->collection() as $child){
+          if($this->getPageDescription($child)){
+            return $this->getPageDescription($child);
+          }
+          else {
+            continue;
+          }
+        }
+      }
+      else {
+        return trim($this->sanitizeMarkdowns(strip_tags($page->summary())));
+      }
+    }
+
+    /**
+     * Cleans a string and determines if it's actually empty
+     * @return boolean
+     */
+    private function stringIsEmpty($string) {
+      return empty(trim($string));
+    }
+
     private function sanitizeMarkdowns($text){
         $rules = array (
             '/(#+)(.*)/'                             => '\2',  // headers
