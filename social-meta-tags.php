@@ -139,9 +139,9 @@ class SocialMetaTagsPlugin extends Plugin
 
             $image = $this->getPageImage($this->grav['page']);
             if (!empty($image)) {
-                $meta['twitter:image']['name']     = 'twitter:image';
-                $meta['twitter:image']['property'] = 'twitter:image';
-                $meta['twitter:image']['content']  = $this->grav['uri']->base() . $image->url();
+                $meta['og:image']['name']     = 'og:image';
+                $meta['og:image']['property'] = 'og:image';
+                $meta['og:image']['content']  = $this->grav['uri']->base() . $image->url();
             }
 
             $meta['fb:app_id']['name']         = 'fb:app_id';
