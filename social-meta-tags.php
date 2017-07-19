@@ -73,14 +73,12 @@ class SocialMetaTagsPlugin extends Plugin
             if (!isset($meta['twitter:description'])) {
                 $meta['twitter:description']['name']     = 'twitter:description';
                 $meta['twitter:description']['property'] = 'twitter:description';
-                $meta['twitter:description']['content']  = $this->sanitizeMarkdowns(strip_tags($this->grav['page']->summary()));
+                $meta['twitter:description']['content']  = $this->getPageDescription($this->grav['page']);
             }
 
             if (!isset($meta['twitter:image'])) {
-                if (!empty($this->grav['page']->value('media.image'))) {
-                    $images = $this->grav['page']->media()->images();
-                    $image  = array_shift($images);
-
+                $image = $this->getPageImage($this->grav['page']);
+                if (!empty($image)) {
                     $meta['twitter:image']['name']     = 'twitter:image';
                     $meta['twitter:image']['property'] = 'twitter:image';
                     $meta['twitter:image']['content']  = $this->grav['uri']->base() . $image->url();
@@ -119,9 +117,9 @@ class SocialMetaTagsPlugin extends Plugin
 
         if($this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.facebook.enabled')){
 
-            $meta['og:sitename']['name']        = 'og:sitename';
-            $meta['og:sitename']['property']    = 'og:sitename';
-            $meta['og:sitename']['content']     = $this->grav['page']->value('name');
+            $meta['og:sitename']['name']        = 'og:site_name';
+            $meta['og:sitename']['property']    = 'og:site_name';
+            $meta['og:sitename']['content']     = $this->grav['config']->get('site.title');
 
             $meta['og:title']['name']           = 'og:title';
             $meta['og:title']['property']       = 'og:title';
@@ -129,7 +127,7 @@ class SocialMetaTagsPlugin extends Plugin
 
             $meta['og:description']['name']     = 'og:description';
             $meta['og:description']['property'] = 'og:description';
-            $meta['og:description']['content']  = $this->sanitizeMarkdowns(strip_tags($this->grav['page']->summary()));
+            $meta['og:description']['content']  =  $this->getPageDescription($this->grav['page']);
 
             $meta['og:type']['name']            = 'og:type';
             $meta['og:type']['property']        = 'og:type';
@@ -139,13 +137,11 @@ class SocialMetaTagsPlugin extends Plugin
             $meta['og:url']['property']         = 'og:url';
             $meta['og:url']['content']          = $this->grav['uri']->url(true);
 
-            if (!empty($this->grav['page']->value('media.image'))) {
-                $images = $this->grav['page']->media()->images();
-                $image  = array_shift($images);
-
-                $meta['og:image']['name']      = 'og:image';
-                $meta['og:image']['property']  = 'og:image';
-                $meta['og:image']['content']   = $this->grav['uri']->base() . $image->url();
+            $image = $this->getPageImage($this->grav['page']);
+            if (!empty($image)) {
+                $meta['og:image']['name']     = 'og:image';
+                $meta['og:image']['property'] = 'og:image';
+                $meta['og:image']['content']  = $this->grav['uri']->base() . $image->url();
             }
 
             $meta['fb:app_id']['name']         = 'fb:app_id';
@@ -155,7 +151,56 @@ class SocialMetaTagsPlugin extends Plugin
         }
         return $meta;
     }
-    
+
+    /**
+     * Get the image for the page.
+     * @param  Grav\Common\Page\Page
+     * @return Image|null
+     */
+    private function getPageImage($page) {
+      if(count($page->collection()->modular()) && empty($page->value('media.image'))) {
+        foreach($page->collection()->modular() as $child){
+          if($child->value('media.image')){
+            return array_shift($child->media()->images());
+          }
+        }
+      }
+      else if(empty($page->value('media.image'))) {
+        return null;
+      }
+      else {
+        return array_shift($page->media()->images());
+      }
+    }
+
+    /**
+     * Gets the description of a page
+     * @return string
+     */
+    private function getPageDescription($page) {
+      if(count($page->collection()->modular()) && $this->stringIsEmpty($this->sanitizeMarkdowns(strip_tags($page->summary())))) {
+        foreach($page->collection()->modular() as $child){
+          if($this->getPageDescription($child)){
+            return $this->getPageDescription($child);
+          }
+          else {
+            continue;
+          }
+        }
+      }
+      else {
+        return trim($this->sanitizeMarkdowns(strip_tags($page->summary())));
+      }
+    }
+
+    /**
+     * Cleans a string and determines if it's actually empty
+     * @return boolean
+     */
+    private function stringIsEmpty($string) {
+      return empty(trim($string));
+    }
+
     private function sanitizeMarkdowns($text){
         $rules = array (
             '/(#+)(.*)/'                             => '\2',  // headers
@@ -172,6 +217,7 @@ class SocialMetaTagsPlugin extends Plugin
             '/(\*|\+|-)(.*)/'                        => '\2',  // ul lists
             '/\n[0-9]+\.(.*)/'                       => '\2',  // ol lists
             '/(&gt;|\>)+(.*)/'                       => '\2',  // blockquotes
+            '/\s+/'                                  => ' ',
         );
 
         foreach ($rules as $regex => $replacement) {
