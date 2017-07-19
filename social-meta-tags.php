@@ -162,7 +162,7 @@ class SocialMetaTagsPlugin extends Plugin
      */
     private function getPageDescription($page) {
       if(count($page->collection()->modular()) && $this->stringIsEmpty($this->sanitizeMarkdowns(strip_tags($page->summary())))) {
-        foreach($page->collection() as $child){
+        foreach($page->collection()->modular() as $child){
           if($this->getPageDescription($child)){
             return $this->getPageDescription($child);
           }
@@ -200,6 +200,7 @@ class SocialMetaTagsPlugin extends Plugin
             '/(\*|\+|-)(.*)/'                        => '\2',  // ul lists
             '/\n[0-9]+\.(.*)/'                       => '\2',  // ol lists
             '/(&gt;|\>)+(.*)/'                       => '\2',  // blockquotes
+            '/\s+/'                                  => ' ',
         );
 
         foreach ($rules as $regex => $replacement) {
