@@ -165,7 +165,7 @@ class SocialMetaTagsPlugin extends Plugin
           }
         }
       }
-      else if(empty($this->grav['page']->value('media.image'))) {
+      else if(empty($page->value('media.image'))) {
         return null;
       }
       else {
