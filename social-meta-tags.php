@@ -119,9 +119,9 @@ class SocialMetaTagsPlugin extends Plugin
 
         if($this->grav['config']->get('plugins.social-meta-tags.social_pages.pages.facebook.enabled')){
 
-            $meta['og:sitename']['name']        = 'og:sitename';
-            $meta['og:sitename']['property']    = 'og:sitename';
-            $meta['og:sitename']['content']     = $this->grav['page']->value('name');
+            $meta['og:sitename']['name']        = 'og:site_name';
+            $meta['og:sitename']['property']    = 'og:site_name';
+            $meta['og:sitename']['content']     = $this->grav['config']->get('site.title');
 
             $meta['og:title']['name']           = 'og:title';
             $meta['og:title']['property']       = 'og:title';
