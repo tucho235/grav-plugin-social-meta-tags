@@ -77,10 +77,8 @@ class SocialMetaTagsPlugin extends Plugin
             }
 
             if (!isset($meta['twitter:image'])) {
-                if (!empty($this->grav['page']->value('media.image'))) {
-                    $images = $this->grav['page']->media()->images();
-                    $image  = array_shift($images);
-
+                $image = $this->getPageImage($this->grav['page']);
+                if (!empty($image)) {
                     $meta['twitter:image']['name']     = 'twitter:image';
                     $meta['twitter:image']['property'] = 'twitter:image';
                     $meta['twitter:image']['content']  = $this->grav['uri']->base() . $image->url();
@@ -139,13 +137,11 @@ class SocialMetaTagsPlugin extends Plugin
             $meta['og:url']['property']         = 'og:url';
             $meta['og:url']['content']          = $this->grav['uri']->url(true);
 
-            if (!empty($this->grav['page']->value('media.image'))) {
-                $images = $this->grav['page']->media()->images();
-                $image  = array_shift($images);
-
-                $meta['og:image']['name']      = 'og:image';
-                $meta['og:image']['property']  = 'og:image';
-                $meta['og:image']['content']   = $this->grav['uri']->base() . $image->url();
+            $image = $this->getPageImage($this->grav['page']);
+            if (!empty($image)) {
+                $meta['twitter:image']['name']     = 'twitter:image';
+                $meta['twitter:image']['property'] = 'twitter:image';
+                $meta['twitter:image']['content']  = $this->grav['uri']->base() . $image->url();
             }
 
             $meta['fb:app_id']['name']         = 'fb:app_id';
@@ -154,6 +150,27 @@ class SocialMetaTagsPlugin extends Plugin
 
         }
         return $meta;
+    }
+
+    /**
+     * Get the image for the page.
+     * @param  Grav\Common\Page\Page
+     * @return Image|null
+     */
+    private function getPageImage($page) {
+      if(count($page->collection()->modular()) && empty($page->value('media.image'))) {
+        foreach($page->collection()->modular() as $child){
+          if($child->value('media.image')){
+            return array_shift($child->media()->images());
+          }
+        }
+      }
+      else if(empty($this->grav['page']->value('media.image'))) {
+        return null;
+      }
+      else {
+        return array_shift($page->media()->images());
+      }
     }
 
     /**
