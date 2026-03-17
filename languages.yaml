@@ -30,6 +30,11 @@ en:
         APPID: 'App ID'
         APPID_HELP: 'The App ID you get from the Facebook Developers page (https://developers.facebook.com/apps).'
 
+      JSONLD:
+        NAME: 'JSON-LD / Schema.org'
+        ENABLED: 'JSON-LD structured data active'
+        HELP: 'Inject Schema.org structured data for Google rich results'
+
 # Español
 es:
   PLUGINS:
@@ -62,6 +67,11 @@ es:
         APPID: 'App ID'
         APPID_HELP: 'El ID de la aplicación que obtiene de la página de desarrolladores de Facebook (https://developers.facebook.com/apps).'
 
+      JSONLD:
+        NAME: 'JSON-LD / Schema.org'
+        ENABLED: 'Datos estructurados JSON-LD activo'
+        HELP: 'Inyecta datos estructurados Schema.org para resultados enriquecidos de Google'
+
 # French
 fr:
   PLUGINS:
@@ -88,11 +98,16 @@ fr:
         USERNAME_HELP: 'Si le plugin AboutMe n''est pas utilisé, veuillez définir le nom d''utilisateur Twitter SVP'
 
       FACEBOOK:
-        NAME: 'Facebook Open Graph'
-        ENABLED: 'Facebook Open Graph activé'
-        HELP: 'Partager sur Facebook'
-        APPID: 'ID d’application'
-        APPID_HELP: 'L’ID d’application pour se connecter à la page Développeurs Facebook (https://developers.facebook.com/apps).'
+        NAME: ‘Facebook Open Graph’
+        ENABLED: ‘Facebook Open Graph activé’
+        HELP: ‘Partager sur Facebook’
+        APPID: ‘ID d’application’
+        APPID_HELP: ‘L’ID d’application pour se connecter à la page Développeurs Facebook (https://developers.facebook.com/apps).’
+
+      JSONLD:
+        NAME: ‘JSON-LD / Schema.org’
+        ENABLED: ‘Données structurées JSON-LD activées’
+        HELP: ‘Injecter des données structurées Schema.org pour les résultats enrichis Google’
 
 # German
 de:
@@ -125,3 +140,8 @@ de:
         HELP: 'Teile auf Facebook'
         APPID: 'App ID'
         APPID_HELP: 'Dies ist die ID-Nummer, die auf der Facebook Entwickler-Website erhältlich ist (https://developers.facebook.com/apps).'
+
+      JSONLD:
+        NAME: 'JSON-LD / Schema.org'
+        ENABLED: 'JSON-LD strukturierte Daten aktiviert'
+        HELP: 'Schema.org strukturierte Daten für Google Rich Results einfügen'

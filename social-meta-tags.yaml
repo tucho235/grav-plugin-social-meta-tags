@@ -1,4 +1,6 @@
 enabled: true
+jsonld:
+  enabled: true
 social_pages:
   pages:
     twitter:

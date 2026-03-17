@@ -1,5 +1,5 @@
 name: Social Meta Tags
-version: 0.2.1
+version: 0.3.0
 description: Facebook Open Graph and Twitter Cards Meta Tags
 icon: code
 author:
@@ -92,3 +92,17 @@ form:
                     label: PLUGINS.SOCIAL_META_TAGS.FACEBOOK.APPID
                     help: PLUGINS.SOCIAL_META_TAGS.FACEBOOK.APPID_HELP
                     size: small
+              jsonld:
+                type: tab
+                title: PLUGINS.SOCIAL_META_TAGS.JSONLD.NAME
+                fields:
+                  jsonld.enabled:
+                    type: toggle
+                    label: PLUGINS.SOCIAL_META_TAGS.JSONLD.ENABLED
+                    highlight: 1
+                    default: 1
+                    options:
+                      1: PLUGINS.SOCIAL_META_TAGS.YES
+                      0: PLUGINS.SOCIAL_META_TAGS.NO
+                    validate:
+                      type: bool
